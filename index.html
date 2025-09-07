@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>CubeVerse</title>
+<link rel="icon" type="image/png" href="favicon.png">
+<style>
+    body { font-family: Arial, sans-serif; background-color: #121212; color: #fff; margin:0; padding:0; }
+    header { background-color: #1f1f1f; padding:20px; text-align:center; }
+    h1 { margin:0; font-size:36px; color:#00ffcc; }
+    main { padding:40px 20px; max-width:800px; margin:auto;}
+    section { margin-bottom:30px; background-color:#1f1f1f; padding:20px; border-radius:10px; box-shadow:0 0 10px #000; }
+    h2 { color:#00ccff; margin-top:0; display:flex; align-items:center; }
+    h2 img { width:32px; height:32px; margin-left:10px; }
+
+    p { font-size:18px; line-height:1.6; }
+
+    /* Botões dos modos */
+    .game-buttons button {
+        background-color:#292929;
+        color:#fff;
+        border:none;
+        padding:15px 20px;
+        margin:10px;
+        border-radius:5px;
+        cursor:pointer;
+        font-size:16px;
+        transition: transform 0.2s, filter 0.2s;
+        width: 45%;
+        max-width: 200px;
+    }
+    .game-buttons button:hover { transform: scale(1.05); filter: brightness(1.2); }
+
+    .game-details { margin-top:20px; background-color:#292929; padding:20px; border-radius:10px; min-height:80px; text-align:center; font-size:18px; }
+
+    input, textarea {
+        width: 100%;
+        padding:10px;
+        margin-top:10px;
+        border-radius:5px;
+        border:none;
+        font-size:16px;
+    }
+    textarea { resize: vertical; height:80px; }
+    .send-btn {
+        background-color:#00ccff;
+        color:#000;
+        margin-top:10px;
+        padding:10px 20px;
+        border:none;
+        border-radius:5px;
+        cursor:pointer;
+        font-size:16px;
+        width: 100%;
+    }
+    .send-btn:hover { background-color:#00ffcc; }
+
+    .copy-btn {
+        background-color:#00ccff;
+        color:#000;
+        border:none;
+        padding:8px 15px;
+        border-radius:5px;
+        cursor:pointer;
+        margin-left:10px;
+        font-size:16px;
+    }
+    .copy-btn:hover { background-color:#00ffcc; opacity:0.8; }
+
+    /* Responsividade */
+    @media screen and (max-width: 600px) {
+        h1 { font-size:28px; }
+        h2 { font-size:20px; }
+        h2 img { width:24px; height:24px; }
+        p { font-size:16px; }
+        .game-buttons button { width: 100%; margin: 5px 0; max-width: none; }
+        .game-details { font-size:16px; }
+    }
+</style>
+</head>
+<body>
+
+<header>
+    <h1>CubeVerse</h1>
+    <p>IP do servidor: <strong id="serverIP">cube-verse.play.minekube.net</strong>
+    <button class="copy-btn" onclick="copyIP()">Copiar IP</button></p>
+</header>
+
+<main>
+    <!-- Seção Sobre CubeVerse -->
+    <section id="sobre">
+        <h2>Sobre CubeVerse <img src="favicon.png" alt="Logo"></h2>
+        <div class="game-details">
+            <p>CubeVerse é um servidor multiplayer com vários minigames divertidos, incluindo PvP, parkour e arenas temáticas. Junte-se a amigos e jogue no mundo cheio de desafios!</p>
+        </div>
+    </section>
+
+    <!-- Seção Modos de Jogo -->
+    <section id="modos">
+        <h2>Modos de Jogo</h2>
+        <div class="game-buttons">
+            <button onclick="showDetails('pvp')">PVP</button>
+            <button onclick="showDetails('parkour')">PARKOUR</button>
+            <button onclick="showDetails('ice')">ICE ARENA</button>
+            <button onclick="showDetails('bow')">Bow PVP</button>
+        </div>
+        <div class="game-details" id="gameDetails">
+            Clique em um modo de jogo
+        </div>
+    </section>
+
+    <!-- Seção Adicione seu Minigame -->
+    <section>
+        <h2>Adicione seu Minigame</h2>
+        <div class="game-details">
+            <p>Tem uma ideia de minigame? Envie para nós e ela pode aparecer no CubeVerse!</p>
+            <form action="mailto:matucazinho@gmail.com?subject=Sugestao%20de%20Minigame" method="post" enctype="text/plain">
+                <input type="text" name="nome" placeholder="Seu nome" required>
+                <textarea name="minigame" placeholder="Nome ou descrição do minigame" required></textarea>
+                <button type="submit" class="send-btn">Enviar Sugestão</button>
+            </form>
+        </div>
+    </section>
+</main>
+
+<script>
+    // Forçar o site a abrir no topo
+    window.onload = function() {
+        window.scrollTo(0, 0);
+    }
+
+    const details = {
+        pvp: "PVP: um minigame de PvP em uma arena.",
+        parkour: "PARKOUR: faça parkour com 5 levels diferentes.",
+        ice: "ICE ARENA: lute com vara de repulsão em uma arena de gelo cheia de buracos.",
+        bow: "Bow PVP: é um minigame de PvP com uma flecha e outros itens."
+    };
+
+    function showDetails(mode) {
+        document.getElementById("gameDetails").innerText = details[mode];
+    }
+
+    function copyIP() {
+        const ip = document.getElementById("serverIP").textContent;
+        navigator.clipboard.writeText(ip).then(() => {
+            alert("IP copiado para a área de transferência!");
+        }).catch(() => {
+            alert("Não foi possível copiar o IP.");
+        });
+    }
+</script>
+
+</body>
+</html>
